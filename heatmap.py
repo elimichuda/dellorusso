@@ -19,7 +19,7 @@ def geocode_zipcode(zipcode, geocoder):
         return None
     return None
 
-df = pd.read_csv('/Users/elimichuda/Desktop/SURG2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
+df = pd.read_csv('/Users/elimichuda/PycharmProjects/dellorusso/SURG2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
 
 print(df.columns)
 

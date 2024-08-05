@@ -72,5 +72,25 @@
                 {"blur": 15, "maxZoom": 18, "minOpacity": 0.5, "radius": 25}
             ).addTo(map_a095fed98f4964d08ae5bb89e1009442);
 
+            var locations = [
+                {'name': 'New Rochelle', 'lat': 40.897720, 'lon': -73.795080, 'color': 'green'},
+                {'name': 'Brooklyn', 'lat': 40.687390, 'lon': -73.985270, 'color': 'blue'},
+                {'name': 'Bergenfield', 'lat': 40.927980, 'lon': -73.995780, 'color': 'purple'},
+                {'name': 'York Ave', 'lat': 40.779700, 'lon': -73.944590, 'color': 'darkgoldenrod'},
+                {'name': 'Iselin', 'lat': 40.564120, 'lon': -74.301360, 'color': 'lightseagreen'},
+                {'name': 'Westport', 'lat': 41.1370478, 'lon': -73.3407195, 'color': 'blueviolet'},
+                {'name': 'Long Island' , 'lat': 40.755034, 'lon': -73.6935516}
+            ];
+
+            locations.forEach(function(location) {
+                var marker = L.marker([location.lat, location.lon], {
+                    icon: L.AwesomeMarkers.icon({
+                        icon: 'info-sign',
+                        markerColor: location.color
+                    })
+                }).addTo(map_a095fed98f4964d08ae5bb89e1009442);
+                marker.bindPopup(location.name);
+            });
+
 </script>
 </html>

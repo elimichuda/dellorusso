@@ -16,7 +16,7 @@ def geocode_zipcode(zipcode, geocoder):
     return None
 
 # Load the dataset
-df = pd.read_csv('/Users/elimichuda/Desktop/SURG2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
+df = pd.read_csv('/Users/elimichuda/Desktop/SEMS2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
 # Print the columns to check the data
 print(df.columns)
 
@@ -34,12 +34,12 @@ def create_heat_map(data, year):
     map_center = [data['latitude'].mean(), data['longitude'].mean()]
     mymap = folium.Map(location=map_center, zoom_start=10)
     HeatMap(heat_data).add_to(mymap)
-    map_filename = f"patients_heatmap_{year}.html"
+    map_filename = f"patients_heatmap_seminars_{year}.html"
     mymap.save(map_filename)
     print(f"Saved heat map for {year} as {map_filename}")
 
 # Create heat maps for each year
-create_heat_map(df.iloc[0:4558], 2021)
-create_heat_map(df.iloc[4558:8091], 2022)
-create_heat_map(df.iloc[8091:11740], 2023)
-create_heat_map(df.iloc[11740:], 2024)
+create_heat_map(df.iloc[0:9795], 2021)
+create_heat_map(df.iloc[9796:17515], 2022)
+create_heat_map(df.iloc[17516:26117], 2023)
+create_heat_map(df.iloc[26118:], 2024)

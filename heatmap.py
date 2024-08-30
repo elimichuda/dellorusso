@@ -43,3 +43,4 @@ create_heat_map(df.iloc[0:4558], 2021)
 create_heat_map(df.iloc[4558:8091], 2022)
 create_heat_map(df.iloc[8091:11740], 2023)
 create_heat_map(df.iloc[11740:], 2024)
+

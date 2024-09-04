@@ -5,8 +5,8 @@ key = '047040cb241e47d4a12287c7e2e16fe3'
 geocoder = OpenCageGeocode(key)
 
 # Load the dataset
-df = pd.read_csv('/Users/elimichuda/Desktop/SURG2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
-df = df.iloc[11740:]
+df = pd.read_csv('/Users/elimichuda/Desktop/SEMS2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
+df = df.iloc[1:9796]
 
 # Function to geocode ZIP codes
 def geocode_zipcode(zipcode, geocoder):

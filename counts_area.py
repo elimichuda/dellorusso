@@ -4,14 +4,12 @@ from opencage.geocoder import OpenCageGeocode
 key = '047040cb241e47d4a12287c7e2e16fe3'
 geocoder = OpenCageGeocode(key)
 
-# Load the dataset
 df = pd.read_csv('/Users/elimichuda/Desktop/SEMS2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
 df = df.iloc[1:9796]
 
-# Function to geocode ZIP codes
 def geocode_zipcode(zipcode, geocoder):
     try:
-        zipcode = zipcode.zfill(5)  # Ensure ZIP code has 5 digits
+        zipcode = zipcode.zfill(5)
         result = geocoder.geocode(zipcode, countrycode='us')
         if result and len(result):
             return [result[0]['geometry']['lat'], result[0]['geometry']['lng']]
@@ -20,7 +18,7 @@ def geocode_zipcode(zipcode, geocoder):
     return None
 
 df['coords'] = df['PatZip'].apply(lambda x: geocode_zipcode(x, geocoder))
-df = df.dropna(subset=['coords'])  # Drop rows where geocoding failed
+df = df.dropna(subset=['coords'])
 df['latitude'] = df['coords'].apply(lambda x: x[0])
 df['longitude'] = df['coords'].apply(lambda x: x[1])
 
@@ -43,7 +41,7 @@ def is_inside_region(point, region_bounds):
     lon_max = max([b[1] for b in region_bounds])
     return lat_min <= lat <= lat_max and lon_min <= lon <= lon_max
 
-# Function to assign regions to each patient based on their coordinates
+
 def assign_region(row):
     point = (row['latitude'], row['longitude'])
     for region_name, bounds in regions.items():
@@ -51,13 +49,11 @@ def assign_region(row):
             return region_name
     return "unknown"
 
-# Assign each patient to a region
+
 df['region'] = df.apply(assign_region, axis=1)
 
-# Count the number of patients in each region
 patient_counts = df['region'].value_counts()
 
-# Display the counts for each region
 print(patient_counts)
 
 

@@ -5,12 +5,12 @@ def create_arc(lat, lon, radius, start_angle, end_angle, num_points=100):
     points = []
     for angle in range(start_angle, end_angle):
         angle_rad = math.radians(angle)
-        lat_offset = (radius / 111111) * math.cos(angle_rad)  # Approximation for latitude
-        lon_offset = (radius / (111111 * math.cos(math.radians(lat)))) * math.sin(angle_rad)  # Approximation for longitude
+        lat_offset = (radius / 111111) * math.cos(angle_rad)
+        lon_offset = (radius / (111111 * math.cos(math.radians(lat)))) * math.sin(angle_rad)
         points.append([lat + lat_offset, lon + lon_offset])
     return points
 
-# Example coordinates for Dello Russo locations
+# coordinates for Dello Russo locations
 locations = [
     {'name': 'New Rochelle', 'lat': 40.897720, 'lon': -73.795080, 'color': 'green'},
     {'name': 'Brooklyn', 'lat': 40.687390, 'lon': -73.985270, 'color': 'blue'},
@@ -19,7 +19,6 @@ locations = [
     {'name': 'Iselin', 'lat': 40.564120, 'lon': -74.301360, 'color': 'lightseagreen'},
     {'name': 'Westport', 'lat': 41.1370478, 'lon': -73.3407195, 'color': 'blueviolet'}
 
-    # Add more locations as needed
 ]
 
 locationsFuture = [
@@ -38,11 +37,11 @@ locationsPhase3 = [
     {'name': 'Towson', 'lat': 39.4018513, 'lon': -76.6023803}
 ]
 
-# Create a map centered around the first location
+
 map_center = [locations[0]['lat'], locations[0]['lon']]
 mymap = folium.Map(location=map_center, zoom_start=10)
 
-# Add circles and markers for each location
+
 for location in locations:
     if location['name'] != 'Bergenfield':
         folium.Circle(
@@ -52,7 +51,7 @@ for location in locations:
             color='blue',
             fill=True,
             fill_color='blue',
-            fill_opacity=0.3  # Adjust opacity to reduce overlap visibility
+            fill_opacity=0.3
         ).add_to(mymap)
         folium.Marker(
             location=[location['lat'], location['lon']],

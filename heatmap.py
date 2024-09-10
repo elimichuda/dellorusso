@@ -12,19 +12,17 @@ def geocode_zipcode(zipcode, geocoder):
             return [result[0]['geometry']['lat'], result[0]['geometry']['lng']]
     except Exception as e:
         print(f"Error geocoding {zipcode}: {e}")
-        return None  # Handle invalid or missing zipcodes
+        return None
     return None
 
 # Load the dataset
 df = pd.read_csv('/Users/elimichuda/Desktop/SURG2124.CSV', encoding='ISO-8859-1', dtype={'PatZip': str}, low_memory=False)
-# Print the columns to check the data
 print(df.columns)
 
-# Set API key for geocoding
+
 key = '047040cb241e47d4a12287c7e2e16fe3'
 geocoder = OpenCageGeocode(key)
 
-# Function to create heat map
 def create_heat_map(data, year):
     data['coords'] = data['PatZip'].apply(lambda x: geocode_zipcode(x, geocoder))
     data = data.dropna(subset=['coords'])
@@ -38,7 +36,7 @@ def create_heat_map(data, year):
     mymap.save(map_filename)
     print(f"Saved heat map for {year} as {map_filename}")
 
-# Create heat maps for each year
+#Seminar by year
 create_heat_map(df.iloc[0:4558], 2021)
 create_heat_map(df.iloc[4558:8091], 2022)
 create_heat_map(df.iloc[8091:11740], 2023)
